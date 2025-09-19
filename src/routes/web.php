@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +16,4 @@ Route::get('/', function () {
 });
 
 Route::get('/todo', 'TodoController@index');
-// Route::get('/todo', function () {
-//     echo 'Hello World!';
-// });
+Route::get('/todo/create', 'TodoController@create'); 
