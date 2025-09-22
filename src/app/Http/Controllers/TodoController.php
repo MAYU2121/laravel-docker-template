@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class TodoController extends Controller
 {
     private $todo;
-     public function __construct(Todo $todo)
+    public function __construct(Todo $todo)
     {
         $this->todo = $todo;
     }
@@ -40,10 +40,19 @@ class TodoController extends Controller
         return view('todo.show', ['todo' => $todo]);
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
 
-        $todos =$this->todo->find($id);
+        $todos = $this->todo->find($id);
         return view('todo.edit', ['todo' => $todos]);
     }
 
+    public function update(Request $request, $id)
+    {
+        $inputs = $request->all();
+        $todo = $this->todo->find($id);
+        $todo->fill($inputs)->save();
+
+        return redirect()->route('todo.show', $todo->id);
+    }
 }
